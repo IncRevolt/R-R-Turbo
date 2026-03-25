@@ -11,9 +11,10 @@ Debloated Windows 11 Image
 
 ---
 
-> *"Reports of this hardware's death were greatly exaggerated."*  
+> *"If extending the lifespan of electronics is cool...consider us Miles Davis."*  
 > Renewable Revolt, Inc. · Hammond, Indiana · 501(c)(3) · EIN: 99-2777606  
 > [renewablerevolt.org](https://renewablerevolt.org) · Veteran Owned & Operated
+> On X - @IncRevolt
 
 ---
 
@@ -24,7 +25,7 @@ It ships on every machine we build — and we're publishing it so anyone else ca
 
 The goal is simple: a Windows installation that works *for the person sitting in front of it*, not for Microsoft's data collection pipeline, advertising network, or upsell funnel.
 
-This is not a debloat script that gets reversed on the next update.  Everything removed is removed **at the ISO level** — before the OS ever touches the drive.  Windows updates do not bring it back.  We proved this over 9 months of production deployment across multiple machines on multiple hardware platforms.
+This is not simply a debloat script that gets reversed on the next update.  Everything removed is removed **at the ISO level** — before the OS ever touches the drive.  Windows updates do not bring it back.  We proved this over 9 months of production deployment across multiple machines on multiple hardware platforms.  A culmination of five versions over 3+ years.
 
 ---
 
@@ -43,13 +44,15 @@ slmgr /ipk XXXXX-XXXXX-XXXXX-XXXXX-XXXXX
 Users must provide their own valid **Office 2019 Pro Plus** license.  
 The suite is ready to use — activation requires your own key.
 
-Purchase licenses only from authorized Microsoft resellers.  We do not endorse specific third-party key sellers — if a price looks too good to be true, the key probably has a short lifespan.
+Purchase licenses only from authorized Microsoft resellers.
 
 We ship this image on machines sold through Renewable Revolt.  Our customers receive valid licenses as part of their purchase.  If you are using this image independently, licensing compliance is your responsibility.
 
 ---
 
 ## How It's Built
+
+We focus on dependencies and stability - just like building a slimmed-down Linux distribution.
 
 ### Layer 1 — Clean ISO Source
 Windows 11 Pro ISOs sourced directly from Microsoft via **[UUP Dump](https://uupdump.net)**.  
@@ -60,7 +63,7 @@ No third-party pre-built ISOs.  You can verify the source yourself — and you s
 
 Full credit to NTDEV — this project stands on that foundation.  Go support him: [Ko-fi](https://ko-fi.com/ntdev) · [Patreon](https://patreon.com/ntdev)
 
-We use the **standard builder** — not Core.  The standard builder preserves Windows Update serviceability.  Tiny11 Core is a development/testing tool and is not suitable for daily use.
+We use the **standard builder** — not Core.  The standard builder preserves Windows Update serviceability.  Tiny11 Core is a development/testing tool and is "not suitable for daily use".  We agree.
 
 ### Layer 3 — Permanent ISO-Level Customization (NTLite)
 **[NTLite](https://www.nliteos.com)** makes removals permanent at the image level, configures services, applies Group Policy, and hardens the OS before installation ever occurs.
@@ -165,14 +168,14 @@ Applied on first boot:
 | **Fan Control v226** | Open source. Pre-configured for Thermalright cooling hardware. [GitHub](https://github.com/Rem0o/FanControl.Releases) |
 | **OpenRGB** | Open source, vendor-neutral ARGB control. Pre-configured for Nollie RGB controllers. [openrgb.org](https://openrgb.org) |
 | **uPDF** | Lightweight PDF viewer, configured as default. No background services. No Adobe. For documents requiring Adobe features, right-click → Open With → Adobe (install separately as needed). |
-| **DiskGenius (Free)** | Disk management and partition tool. Developed by Eassos Ltd. Legitimate, widely used. Substitute your preferred tool if the provenance is a concern for your environment. |
+| **DiskGenius (Free)** | Disk management and partition tool. Developed by Eassos Ltd. Legitimate, widely used. Substitute your preferred tool. |
 
 ---
 
 ## A Note on Browser History
 
 **v1–v3: Firefox**  
-Firefox is a fine browser — not a serious privacy risk.  The criticism we'd read overstated it.  Mozilla is a nonprofit, Firefox is open source, and it's one of the most audited browsers available.  The real concerns (telemetry on by default, Pocket integration, sponsored tiles) are real but configurable.  We moved on for different reasons.
+Firefox is a fine browser — not a serious privacy risk.  We found Duck Duck Go to be lighter and less resource intensive as a primary brower.  Mozilla is a nonprofit, Firefox is open source, and it's one of the most audited browsers available.  The real concerns (telemetry on by default, Pocket integration, sponsored tiles) are real but configurable.
 
 **v4–v5 initial: Opera Air**  
 Opera has been owned by a Chinese investment consortium (Golden Brick Capital Private Equity) since 2016.  For a privacy-first image, that ownership is a structural problem you can't configure away.  We should have caught this sooner.  We didn't.  It's gone.
@@ -184,7 +187,8 @@ DuckDuckGo handles 95% of use cases.  LibreWolf handles the rest.  Both are open
 
 ## A Note on Signal RGB
 
-Early builds included Signal RGB for ARGB control.  A community member correctly called it out.  Signal RGB is closed-source, requires a cloud account, and runs persistent background services — the opposite of everything this image is trying to be.  OpenRGB replaced it.  Open source, vendor-neutral, no account required, pre-configured before it ships.
+Early builds included Signal RGB for ARGB control.  A community member correctly called it out.  Signal RGB is closed-source, requires a cloud account, and runs persistent background services — the opposite of everything this image is trying to be.  OpenRGB replaced it.  Open source, vendor-neutral, no account required, pre-configured before it ships.  OpenRGB is easy to use...but has a "Windows-95" feel and takes a bit of work to set up properly.  Best set-up guide we've found is on the Nollie RGB website.
+https://nolliergb.com/how-to-setup-openrgb-effects-engine-plugin/
 
 Being corrected publicly is how open source is supposed to work.  Credit to the person who spotted it.
 
@@ -212,11 +216,11 @@ The image ships with a default location set.  If you're in the Chicago area, you
 - [ ] Windows 11 Pro activation — Applying your license key  
 - [ ] Office 2019 Pro Plus activation — Applying your license key  
 
-Follow **[@RenewableRevolt](https://x.com/RenewableRevolt)** for updates.
+Follow **[@RenewableRevolt](https://x.com/IncRevolt)** for updates.
 
 ---
 
-## For Refurbishers and Builders
+## For Refurbishers and Builders (and everyone else)
 
 This methodology is published so you can replicate it — not just use the output.  
 
@@ -259,7 +263,7 @@ This image would not exist without:
 We recover enterprise hardware from e-waste streams and rebuild it into optimized, privacy-first computers for veterans, students, and underserved families.
 
 Below $800, there are zero new gaming desktops with capable GPUs at any major US retailer.  
-We fill that gap — starting at $449.
+We fill that gap — starting at $349.
 
 **[renewablerevolt.org](https://renewablerevolt.org)** · **[eBay Store](https://ebay.us/m/KgGZ0K)** — 100% positive feedback  
 501(c)(3) · EIN: 99-2777606 · Hammond, Indiana · Veteran Owned & Operated

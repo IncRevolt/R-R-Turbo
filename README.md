@@ -1,273 +1,136 @@
 # R-R-Turbo
-Debloated Windows 11 Image
-# Win 11 Pro [RR Turbo]
-### A Privacy-First Windows 11 Pro Image by Renewable Revolt, Incorporated
 
-**Version:** v5  
-**Base:** Windows 11 Pro (24H2)  
-**Built with:** UUP Dump · Tiny11 Builder (NTDEV) · NTLite  
-**Status:** Stable — 9 months production deployment  
-**License:** MIT (build methodology and scripts)
+**Privacy-first, debloated Windows 11 Pro image** designed to breathe life back into older hardware — while delivering a noticeable performance boost on virtually any machine running Windows 11.
 
----
+It strips telemetry, Copilot, Recall, Edge bloat, and Microsoft lock-in at the **ISO level** — so future updates cannot restore what was never shipped. The result: fewer background processes, dramatically lower RAM usage, and resources that stay where they belong — with you, not Microsoft.
 
-> *"If extending the lifespan of electronics is cool...consider us Miles Davis."*  
-> Renewable Revolt, Inc. · Hammond, Indiana · 501(c)(3) · EIN: 99-2777606  
-> [renewablerevolt.org](https://renewablerevolt.org) · Veteran Owned & Operated
-> On X - @IncRevolt
+(Unless, of course, you enjoy providing your data for free and cheerfully donating your CPU cycles and RAM to support that effort.)
 
----
+Built and maintained by [Renewable Revolt](https://renewablerevolt.org/), a veteran-owned 501(c)(3) nonprofit (EIN 99-2777606) dedicated to recovering e-waste, reviving hardware, and redeploying privacy-focused systems. Stable in production for 9+ months.
 
-## What This Is
+## Features
 
-RR Turbo is a custom Windows 11 Pro image built for refurbished and legacy hardware.  
-It ships on every machine we build — and we're publishing it so anyone else can use it.
+- 48% fewer background processes
+- 35% more available RAM headroom
+- No subscriptions, no surveillance, no AI features
+- Pre-installed and configured for long-term stability on legacy hardware (X99, X79, Coffee Lake, etc.)
 
-The goal is simple: a Windows installation that works *for the person sitting in front of it*, not for Microsoft's data collection pipeline, advertising network, or upsell funnel.
+## Pre-installed Software
 
-This is not simply a debloat script that gets reversed on the next update.  Everything removed is removed **at the ISO level** — before the OS ever touches the drive.  Windows updates do not bring it back.  We proved this over 9 months of production deployment across multiple machines on multiple hardware platforms.  A culmination of five versions over 3+ years.
+The following programs are chosen intentionally for **maximum performance + maximum productivity** on older and low-resource hardware:
 
----
+- DuckDuckGo Browser (default)
+- LibreWolf (hardened with uBlock Origin)
+- Office 2019 Pro Plus (unactivated)
+- Fan Control
+- OpenRGB
+- uPDF
+- **DiskGenius Free** — powerful partition management, imaging, and recovery tool (we use this internally at Renewable Revolt; feel free to uninstall if you don't need it)
 
-## License Requirements
+**Graphics driver tools** (included in the Downloads folder for post-install use):
+- **NVCleanstall** — Lightweight NVIDIA driver installer that removes telemetry and bloat (attribution: [TechPowerUp NVCleanstall](https://www.techpowerup.com/nvcleanstall/))
+- **Radeon Software Slimmer** — Tool to slim down AMD Radeon Software (attribution: original project on GitHub)
 
-> ⚠️ **This image does not include a Windows license.**
+Users can run DDU in Safe Mode first, then use these tools or download fresh drivers directly from NVIDIA/AMD.
 
-Users must provide their own valid **Windows 11 Pro** retail license.  
-Apply it after installation:
-```
-slmgr /ipk XXXXX-XXXXX-XXXXX-XXXXX-XXXXX
-```
+**Minimum recommended specifications** for smooth operation:
+- 4-core CPU
+- 4 GB RAM
+- SSD (SATA III works; NVMe performs best)
+- Large paging file (3× RAM for 4 GB systems; 1.5× RAM for 8 GB+)
 
-> ⚠️ **This image includes Office 2019 Pro Plus pre-installed.**
+## What's Removed (Permanent at ISO Level)
 
-Users must provide their own valid **Office 2019 Pro Plus** license.  
-The suite is ready to use — activation requires your own key.
+**Tiny11 Builder + NTLite layers:**
+- Copilot, Recall, all telemetry modules
+- Microsoft Edge (including auto-updates)
+- Consumer Teams, OneDrive, Xbox apps/Game Bar, Store ads, Start menu web search
+- Cortana, Clipchamp, Mail/Calendar, Maps, Weather, News, Tips, Feedback Hub, and most preinstalled consumer apps
 
-Purchase licenses only from authorized Microsoft resellers.
+**Services & Policies:**
+- Telemetry set to Security level
+- Driver auto-updates disabled
+- Delivery Optimization limited to local network
+- Location services, advertising ID, and personal content indexing removed
 
-We ship this image on machines sold through Renewable Revolt.  Our customers receive valid licenses as part of their purchase.  If you are using this image independently, licensing compliance is your responsibility.
+## Requirements
 
----
+- Valid **Windows 11 Pro retail license** (not included)
+- Valid **Office 2019 Pro Plus license** (not included)
+- UEFI boot with Secure Boot optional (works on many non-supported legacy CPUs)
 
-## How It's Built
+## Installation
 
-We focus on dependencies and stability - just like building a slimmed-down Linux distribution.
+1. Download **all** parts of the split archive from the [Releases page](https://github.com/IncRevolt/R-R-Turbo/releases).
+2. Place all parts (`RR-Turbo-v6.7z.001`, `.002`, etc.) in the **same folder**.
+3. Install [7-Zip](https://www.7-zip.org/) (free).
+4. Right-click the **first file** (`RR-Turbo-v6.7z.001`) → **7-Zip** → **Extract Here**.
+5. Enter the password if one was set.
+6. You will get the full `RR-Turbo-v6.wim` file.
 
-### Layer 1 — Clean ISO Source
-Windows 11 Pro ISOs sourced directly from Microsoft via **[UUP Dump](https://uupdump.net)**.  
-No third-party pre-built ISOs.  You can verify the source yourself — and you should.
+**To create a bootable USB:**
+- Use **Rufus** (recommended) — select the `.wim` and write in DD Image mode, or
+- Use Ventoy / NTLite to build a full bootable ISO.
 
-### Layer 2 — Base Reduction (Tiny11 Builder)
-**[Tiny11 Builder](https://github.com/ntdevlabs/tiny11builder)** by NTDEV performs the initial image reduction via PowerShell script operating on the official Microsoft ISO.
+**Post-install (Refurbishers):**  
+Run DDU in Safe Mode to clean GPU drivers before mass deployment.
 
-Full credit to NTDEV — this project stands on that foundation.  Go support him: [Ko-fi](https://ko-fi.com/ntdev) · [Patreon](https://patreon.com/ntdev)
+## Screenshots
 
-We use the **standard builder** — not Core.  The standard builder preserves Windows Update serviceability.  Tiny11 Core is a development/testing tool and is "not suitable for daily use".  We agree.
+All screenshots taken on the same hardware: **Lenovo IdeaPad 1 14ADA05 (82GW)** — a 2021 budget 14" laptop with:
+- **AMD Athlon Silver 3050e** (2C/4T, 1.4–2.8 GHz) — officially supported on Microsoft's Windows 11 CPU compatibility list
+- **4 GB soldered DDR4-2400 RAM** (non-upgradable)
+- Integrated AMD Radeon Vega 3 graphics
 
-### Layer 3 — Permanent ISO-Level Customization (NTLite)
-**[NTLite](https://www.nliteos.com)** makes removals permanent at the image level, configures services, applies Group Policy, and hardens the OS before installation ever occurs.
+- **Before**: Stock Windows 11 + Office 365 (full Microsoft bloat and telemetry)
+- **After**: RR-Turbo v6 + Office 2019 Pro Plus (debloated at ISO level, with LibreWolf, Renewable Revolt Windows theme, and custom Revolt background)
 
-This layer is why v5 holds.  v1–v3 applied tweaks post-install — settings, services, Configuration Manager, Group Policy Editor.  Windows 24H2 and subsequent updates reversed most of them.  NTLite at the ISO level does not have this problem.
+**Desktop of RR-Turbo v6** (LibreWolf as default browser, Renewable Revolt theme and background):
 
-### Layer 4 — Post-Install Configuration
-Applied on first boot:
-- Windows Spotlight → off
-- Transparency effects → off
-- Widgets → off
-- Suggested content and tips → off
+![RR-Turbo v6 Desktop](screenshots/rr-turbo-v6-desktop.png)
 
----
-
-## What's Removed
-
-### Removed by Tiny11 Builder
-- Microsoft Teams (consumer)
-- OneDrive
-- Microsoft Edge *(app removed — some Settings page remnants remain, cosmetic only)*
-- Cortana
-- Xbox apps and related services
-- Clipchamp
-- Mail and Calendar
-- Maps
-- Mixed Reality Portal
-- Skype
-- Solitaire Collection
-- Sticky Notes
-- Weather
-- Phone Link
-- News
-- Tips
-- Feedback Hub
-- Get Help
-- Power Automate
-- To Do
-- Camera
-- Dev Home
-- New Outlook client
-
-### Removed by NTLite — ISO Level, Permanent
-**Surveillance & AI**
-- Microsoft Copilot — screen monitoring AI, runs at startup
-- Windows Recall — screenshots your screen every few seconds and indexes content
-- All telemetry modules — cannot be fully disabled through standard Settings; we remove the modules entirely
-
-**Microsoft Ecosystem Lock-In**
-- Microsoft Edge — complete removal including update services and Bing integration
-- Microsoft Teams (additional complete pass)
-- Start menu web search (Bing)
-- Advertising ID services
-- Windows Search indexing of personal content
-
-**Background Data Collection**
-- Diagnostic data collection services
-- Connected User Experiences and Telemetry (DiagTrack)
-- Data Collection and Publishing service
-- Customer Experience Improvement Program (CEIP)
-- Error Reporting services (Watson)
-- Activity History and Timeline
-
-**Noise**
-- Xbox Game Bar background services
-- Microsoft Store push notification services
-- Suggested app install notifications
-- Location tracking services *(see Known Issues — this has a side effect)*
-
-### Services Disabled or Set to Manual
-| Service | Reason |
-|---|---|
-| SysMain (Superfetch) | Reduces disk thrashing on SSD builds |
-| Windows Error Reporting | Eliminates data transmission to Microsoft |
-| Connected User Experiences and Telemetry | Core telemetry service |
-| Diagnostic Policy Service | Feeds diagnostic data collection |
-| Remote Registry | Attack surface reduction |
-| Windows Insider Service | No insider builds on production hardware |
-| Geolocation Service | Privacy — see Known Issues |
-| Xbox services (×8) | Not needed on gaming-capable hardware with a real GPU |
-
-### Group Policy Applied at ISO Level
-- Telemetry locked to minimum (Security level)
-- Automatic driver updates from Windows Update disabled *(prevents driver conflicts on refurbished hardware with specific GPU configurations)*
-- Windows tips, tricks, and suggested content disabled
-- Consumer experience features disabled
-- Cortana disabled
-- Bing search in Start disabled
-- Windows Spotlight disabled
-- Lock screen advertisements disabled
-- Delivery Optimization restricted to LAN only — no uploading to Microsoft's CDN
-
----
-
-## What's Included
-
-| Software | Notes |
-|---|---|
-| **Office 2019 Pro Plus** | Pre-installed. License required — see above. Permanent, no subscription. |
-| **DuckDuckGo Browser** | Default browser. Privacy-first, no Google tracking. |
-| **LibreWolf** | Firefox fork with telemetry removed, uBlock Origin pre-installed, privacy hardened. Handles the small number of sites that need a full-featured browser engine. |
-| **Fan Control v226** | Open source. Pre-configured for Thermalright cooling hardware. [GitHub](https://github.com/Rem0o/FanControl.Releases) |
-| **OpenRGB** | Open source, vendor-neutral ARGB control. Pre-configured for Nollie RGB controllers. [openrgb.org](https://openrgb.org) |
-| **uPDF** | Lightweight PDF viewer, configured as default. No background services. No Adobe. For documents requiring Adobe features, right-click → Open With → Adobe (install separately as needed). |
-| **DiskGenius (Free)** | Disk management and partition tool. Developed by Eassos Ltd. Legitimate, widely used. Substitute your preferred tool. |
-
----
-
-## A Note on Browser History
-
-**v1–v3: Firefox**  
-Firefox is a fine browser — not a serious privacy risk.  We found Duck Duck Go to be lighter and less resource intensive as a primary brower.  Mozilla is a nonprofit, Firefox is open source, and it's one of the most audited browsers available.  The real concerns (telemetry on by default, Pocket integration, sponsored tiles) are real but configurable.
-
-**v4–v5 initial: Opera Air**  
-Opera has been owned by a Chinese investment consortium (Golden Brick Capital Private Equity) since 2016.  For a privacy-first image, that ownership is a structural problem you can't configure away.  We should have caught this sooner.  We didn't.  It's gone.
-
-**v5 current: DuckDuckGo + LibreWolf**  
-DuckDuckGo handles 95% of use cases.  LibreWolf handles the rest.  Both are open source, both have clean ownership, and together they cover the full surface better than either browser alone.
-
----
-
-## A Note on Signal RGB
-
-Early builds included Signal RGB for ARGB control.  A community member correctly called it out.  Signal RGB is closed-source, requires a cloud account, and runs persistent background services — the opposite of everything this image is trying to be.  OpenRGB replaced it.  Open source, vendor-neutral, no account required, pre-configured before it ships.  OpenRGB is easy to use...but has a "Windows-95" feel and takes a bit of work to set up properly.  Best set-up guide we've found is on the Nollie RGB website.
-https://nolliergb.com/how-to-setup-openrgb-effects-engine-plugin/
-
-Being corrected publicly is how open source is supposed to work.  Credit to the person who spotted it.
-
----
+These side-by-side comparisons show how RR-Turbo transforms marginal, officially "compatible" hardware from sluggish to responsive while restoring privacy and performance.
 
 ## Known Issues
 
-### Time Zone — Set Manually on First Boot
-After installation, set your time zone once:  
-**Settings → Time & Language → Date & Time → Time Zone**
+- **Time Zone Detection**: Automatic time zone selection is disabled due to ISO-level removal of location services. Manually set your time zone on first boot.
+- **Default Location**: The image defaults to Chicagoland (Hammond, IN area). Change if needed.
+- **Hardware-Specific Optimizations**: Fan Control is pre-configured for common Thermalright air coolers. OpenRGB is tuned for Nollie ARGB controllers. Reconfigure as needed on other hardware.
+- **GPU Drivers**: No vendor GPU drivers are included. Run DDU in Safe Mode before mass deployment.
+- **Office 2019 Activation**: Pre-installed but unactivated. Enter your own valid Pro Plus key.
+- **Windows Activation**: Requires a genuine Windows 11 Pro retail license.
+- **Minor First-Boot Tweaks**: Some users report needing to restart once after initial setup for all Group Policy changes to fully apply.
+- **Hardware Minimums**: RR-Turbo will not run suitably with less than a 2C/4T CPU, 4 GB RAM, and an HDD. Machines at or below these specs are better served by a lightweight Linux distribution such as Peppermint OS or Bodhi Linux.
+- **Adobe Acrobat**: If allowed to run automatic updates in the background while open alongside a web browser and Office applications, the device may freeze. If you need Adobe Acrobat, we recommend more than 4 GB RAM.
+- **Windows Real-time Monitoring**: Windows Defender real-time protection cannot be permanently disabled at the ISO level. Manually verify it is turned off (or turn it off) at startup for maximum performance and privacy.
 
-After the first manual set, automatic updates work correctly.  This appears to be a side effect of location services being disabled at the ISO level.  We have not found a workaround that doesn't require re-enabling location tracking.  One manual set on first boot is the current solution.
+These are intentional trade-offs for maximum privacy and performance. Most resolve with one-time manual configuration.
 
-**On the subject of default location:**  
-The image ships with a default location set.  If you're in the Chicago area, you're already pointed at the right neighborhood.  If you're not, you'll want to update it.  Settings → Privacy & Security → Location → Default Location → Set Default.  We're in Chicagoland, so we use the address on Elwood Blues' driver's licence.
+## For Refurbishers & Builders
 
----
+The build methodology (UUP Dump → Tiny11 Builder → NTLite → post-install scripts) is documented in `/docs` (WIP).
 
-## Setup Videos
+## Credits
 
-*(Coming soon)*
-
-- [ ] Fan Control v226 — Initial setup and fan curve configuration  
-- [ ] OpenRGB — First launch, controller detection, and profile setup  
-- [ ] Windows 11 Pro activation — Applying your license key  
-- [ ] Office 2019 Pro Plus activation — Applying your license key  
-
-Follow **[@RenewableRevolt](https://x.com/IncRevolt)** for updates.
-
----
-
-## For Refurbishers and Builders (and everyone else)
-
-This methodology is published so you can replicate it — not just use the output.  
-
-If you're rebuilding hardware for distribution and you're cloning this image using DiskGenius or similar:
-
-> **Run DDU (Display Driver Uninstaller) in Safe Mode before cloning.**  
-> GPU drivers baked into the image will cause problems on different GPU hardware.  
-> A clean image has no GPU drivers.  Each machine installs its own on first boot.
-
-Build notes and documented methodology are in [`/docs`](./docs) — work in progress.
-
----
-
-## Roadmap
-
-- [ ] Custom Android ROMs for tablets and phones *(hardware selection in progress)*
-- [ ] Full documented build methodology for other refurbishers
-- [ ] Platform-specific optimization notes (X99, Coffee Lake, X79)
-
----
-
-## Credit Where It's Due
-
-This image would not exist without:
-
-| Project | Credit |
-|---|---|
-| **[Tiny11 Builder](https://github.com/ntdevlabs/tiny11builder)** — NTDEV | The foundation. Support him: [Ko-fi](https://ko-fi.com/ntdev) / [Patreon](https://patreon.com/ntdev) |
-| **[UUP Dump](https://uupdump.net)** | Clean, verifiable Microsoft ISOs |
-| **[NTLite](https://www.nliteos.com)** | The tool that made permanence possible |
-| **[OpenRGB](https://openrgb.org)** | Open source, vendor-neutral RGB. The right way. |
-| **[Fan Control](https://github.com/Rem0o/FanControl.Releases)** — Rem0o | Open source fan curve software that actually works |
-| **[LibreWolf](https://librewolf.net)** | Firefox, fixed |
-| **[Nollie RGB](https://nolliergb.com)** | RISC-V ARGB controllers. The hardware OpenRGB talks to. |
-
----
+- Tiny11 Builder (NTDEV)
+- UUP Dump
+- NTLite
+- Fan Control (Rem0o)
+- OpenRGB
+- LibreWolf
+- NVCleanstall (TechPowerUp)
+- Radeon Software Slimmer (original project maintainers)
+- Renewable Revolt team — extending hardware life, one system at a time.
 
 ## About Renewable Revolt
 
-We recover enterprise hardware from e-waste streams and rebuild it into optimized, privacy-first computers for veterans, students, and underserved families.
+We recover enterprise e-waste, perform secure data destruction, upgrade components, and redeploy affordable, high-performance PCs without bloat or subscriptions. Focused on veterans, students, families, and gamers - and everyone else who refuses planned obsolescence.
 
-Below $800, there are zero new gaming desktops with capable GPUs at any major US retailer.  
-We fill that gap — starting at $349.
-
-**[renewablerevolt.org](https://renewablerevolt.org)** · **[eBay Store](https://ebay.us/m/KgGZ0K)** — 100% positive feedback  
-501(c)(3) · EIN: 99-2777606 · Hammond, Indiana · Veteran Owned & Operated
+Visit [renewablerevolt.org](https://renewablerevolt.org/) to learn more or support the mission.
 
 ---
 
-*Recover. Revive. Redeploy.*
+**License**
+
+This repository (methodology, scripts, documentation) is licensed under the [MIT License](LICENSE).  
+The Windows image itself is a modified Microsoft product — users must provide their own valid licenses. No Microsoft trademarks or copyrighted material beyond fair use for modification is claimed.

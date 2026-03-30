@@ -1,8 +1,8 @@
-# R-R-Turbo
+# R-R-Turbo (v6)
 
 **Privacy-first, debloated Windows 11 Pro image** designed to breathe life back into older hardware — while delivering a noticeable performance boost on virtually any machine running Windows 11.
 
-It strips telemetry, Copilot, Recall, Edge bloat, and Microsoft lock-in at the **ISO level** — so future updates cannot restore what was never shipped. The result: fewer background processes, dramatically lower RAM usage, and resources that stay where they belong — with you.
+It strips telemetry, Copilot, Recall, Edge bloat, and Microsoft lock-in at the **ISO level** — so future updates cannot restore what was never shipped. The result: fewer background processes, dramatically lower RAM usage, and resources that stay where they belong — working for you.
 
 Built and maintained by [Renewable Revolt](https://renewablerevolt.org/), a veteran-owned 501(c)(3) nonprofit (EIN 99-2777606) dedicated to recovering e-waste, reviving hardware, and redeploying privacy-focused systems. Stable in production for 9+ months.
 
@@ -50,6 +50,7 @@ Users can run DDU in Safe Mode first, then use these tools or download fresh dri
 - Driver auto-updates disabled
 - Delivery Optimization limited to local network
 - Location services, advertising ID, and personal content indexing removed
+- Taskbar search disable (you can enable in settings if you like)
 
 ## Requirements
 
@@ -63,7 +64,7 @@ Users can run DDU in Safe Mode first, then use these tools or download fresh dri
 2. Place all parts (`RR-Turbo-v6.7z.001`, `.002`, etc.) in the **same folder**.
 3. Install [7-Zip](https://www.7-zip.org/) (free).
 4. Right-click the **first file** (`RR-Turbo-v6.7z.001`) → **7-Zip** → **Extract Here**.
-5. Enter the password if one was set.
+5. Enter the password "RRTurbo2026"
 6. You will get the full `RR-Turbo-v6.wim` file.
 
 **To create a bootable USB:**
@@ -87,22 +88,11 @@ All screenshots taken on the same hardware: **Lenovo IdeaPad 1 14ADA05 (82GW)** 
 
 ![RR-Turbo v6 Desktop](screenshots/rr-turbo-v6-desktop.png)
 
-These side-by-side comparisons show how RR-Turbo transforms marginal, officially "compatible" hardware from sluggish to responsive while restoring privacy and performance.
+**Additional screenshots** (added in this release):
+- How to activate Windows 11 license
+- How to activate Office 2019 license
 
-## Known Issues
-
-- **Time Zone Detection**: Automatic time zone selection is disabled due to ISO-level removal of location services. Manually set your time zone on first boot.
-- **Default Location**: The image defaults to Chicagoland (Hammond, IN area). Change if needed.
-- **Hardware-Specific Optimizations**: Fan Control is pre-configured for common Thermalright air coolers. OpenRGB is tuned for Nollie ARGB controllers. Reconfigure as needed on other hardware.
-- **GPU Drivers**: No vendor GPU drivers are included. Run DDU in Safe Mode before mass deployment.
-- **Office 2019 Activation**: Pre-installed but unactivated. Enter your own valid Pro Plus key.
-- **Windows Activation**: Requires a genuine Windows 11 Pro retail license.
-- **Minor First-Boot Tweaks**: Some users report needing to restart once after initial setup for all Group Policy changes to fully apply.
-- **Hardware Minimums**: RR-Turbo will not run suitably with less than a 2C/4T CPU, 4 GB RAM, and an HDD. Machines at or below these specs are better served by a lightweight Linux distribution such as Peppermint OS or Bodhi Linux.
-- **Adobe Acrobat**: If allowed to run automatic updates in the background while open alongside a web browser and Office applications, the device may freeze. If you need Adobe Acrobat, we recommend more than 4 GB RAM.
-- **Windows Real-time Monitoring**: Windows Defender real-time protection cannot be permanently disabled at the ISO level. Manually verify it is turned off (or turn it off) at startup for maximum performance and privacy.
-
-These are intentional trade-offs for maximum privacy and performance. Most resolve with one-time manual configuration.
+These side-by-side comparisons show how RR-Turbo transforms marginal, officially "compatible" hardware from sluggish to responsive while restoring privacy and performance on refurbished and legacy PCs.
 
 ## For Refurbishers & Builders
 
@@ -110,19 +100,15 @@ The build methodology (UUP Dump → Tiny11 Builder → NTLite → post-install s
 
 ## Credits
 
-- Tiny11 Builder (NTDEV)
-- UUP Dump
-- NTLite
-- Fan Control (Rem0o)
-- OpenRGB
-- LibreWolf
+- Tiny11 Builder (NTDEV), UUP Dump, NTLite
+- Fan Control (Rem0o), OpenRGB, LibreWolf
 - NVCleanstall (TechPowerUp)
 - Radeon Software Slimmer (original project maintainers)
 - Renewable Revolt team — extending hardware life, one system at a time.
 
 ## About Renewable Revolt
 
-We recover enterprise e-waste, perform secure data destruction, upgrade components, and redeploy affordable, high-performance PCs without bloat or subscriptions. Focused on veterans, students, families, and gamers - and everyone else who refuses planned obsolescence.
+We recover enterprise e-waste, perform secure data destruction, upgrade components, and redeploy affordable, high-performance PCs without bloat or subscriptions. Focused on veterans, students, families, and gamers who refuse planned obsolescence.
 
 Visit [renewablerevolt.org](https://renewablerevolt.org/) to learn more or support the mission.
 

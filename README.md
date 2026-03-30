@@ -1,4 +1,4 @@
-# R-R-Turbo (v6)
+# R-R-Turbo
 
 **Privacy-first, debloated Windows 11 Pro image** designed to breathe life back into older hardware — while delivering a noticeable performance boost on virtually any machine running Windows 11.
 
@@ -50,7 +50,6 @@ Users can run DDU in Safe Mode first, then use these tools or download fresh dri
 - Driver auto-updates disabled
 - Delivery Optimization limited to local network
 - Location services, advertising ID, and personal content indexing removed
-- Taskbar search disable (you can enable in settings if you like)
 
 ## Requirements
 
@@ -64,7 +63,7 @@ Users can run DDU in Safe Mode first, then use these tools or download fresh dri
 2. Place all parts (`RR-Turbo-v6.7z.001`, `.002`, etc.) in the **same folder**.
 3. Install [7-Zip](https://www.7-zip.org/) (free).
 4. Right-click the **first file** (`RR-Turbo-v6.7z.001`) → **7-Zip** → **Extract Here**.
-5. Enter the password "RRTurbo2026"
+5. Enter the password "RRTurbo2026".
 6. You will get the full `RR-Turbo-v6.wim` file.
 
 **To create a bootable USB:**

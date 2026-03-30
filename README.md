@@ -2,9 +2,7 @@
 
 **Privacy-first, debloated Windows 11 Pro image** designed to breathe life back into older hardware — while delivering a noticeable performance boost on virtually any machine running Windows 11.
 
-It strips telemetry, Copilot, Recall, Edge bloat, and Microsoft lock-in at the **ISO level** — so future updates cannot restore what was never shipped. The result: fewer background processes, dramatically lower RAM usage, and resources that stay where they belong — with you, not Microsoft.
-
-(Unless, of course, you enjoy providing your data for free and cheerfully donating your CPU cycles and RAM to support that effort.)
+It strips telemetry, Copilot, Recall, Edge bloat, and Microsoft lock-in at the **ISO level** — so future updates cannot restore what was never shipped. The result: fewer background processes, dramatically lower RAM usage, and resources that stay where they belong — with you.
 
 Built and maintained by [Renewable Revolt](https://renewablerevolt.org/), a veteran-owned 501(c)(3) nonprofit (EIN 99-2777606) dedicated to recovering e-waste, reviving hardware, and redeploying privacy-focused systems. Stable in production for 9+ months.
 

@@ -2,7 +2,7 @@
 
 **Privacy-first, debloated Windows 11 Pro image** designed to breathe life back into older hardware — while delivering a noticeable performance boost on virtually any machine running Windows 11.
 
-It strips telemetry, Copilot, Recall, Edge bloat, and Microsoft lock-in at the **ISO level** — so future updates cannot restore what was never shipped. The result: fewer background processes, dramatically lower RAM usage, and resources that stay where they belong — working for you.
+It strips telemetry, Copilot, Recall, Edge bloat, and Microsoft lock-in at the **ISO level** — so future updates cannot restore what was never shipped. The result: fewer background processes, dramatically lower RAM usage, and resources that stay where they belong.
 
 Built and maintained by [Renewable Revolt](https://renewablerevolt.org/), a veteran-owned 501(c)(3) nonprofit (EIN 99-2777606) dedicated to recovering e-waste, reviving hardware, and redeploying privacy-focused systems. Stable in production for 9+ months.
 
@@ -63,7 +63,7 @@ Users can run DDU in Safe Mode first, then use these tools or download fresh dri
 2. Place all parts (`RR-Turbo-v6.7z.001`, `.002`, etc.) in the **same folder**.
 3. Install [7-Zip](https://www.7-zip.org/) (free).
 4. Right-click the **first file** (`RR-Turbo-v6.7z.001`) → **7-Zip** → **Extract Here**.
-5. Enter the password "RRTurbo2026".
+5. Enter the password if one was set.
 6. You will get the full `RR-Turbo-v6.wim` file.
 
 **To create a bootable USB:**
@@ -83,15 +83,22 @@ All screenshots taken on the same hardware: **Lenovo IdeaPad 1 14ADA05 (82GW)** 
 - **Before**: Stock Windows 11 + Office 365 (full Microsoft bloat and telemetry)
 - **After**: RR-Turbo v6 + Office 2019 Pro Plus (debloated at ISO level, with LibreWolf, Renewable Revolt Windows theme, and custom Revolt background)
 
-**Desktop of RR-Turbo v6** (LibreWolf as default browser, Renewable Revolt theme and background):
+**RR-Turbo v6 Desktop** (LibreWolf as default browser, Renewable Revolt theme and background):
 
 ![RR-Turbo v6 Desktop](screenshots/rr-turbo-v6-desktop.png)
 
-**Additional screenshots** (added in this release):
+**Additional screenshots:**
 - How to activate Windows 11 license
 - How to activate Office 2019 license
 
-These side-by-side comparisons show how RR-Turbo transforms marginal, officially "compatible" hardware from sluggish to responsive while restoring privacy and performance on refurbished and legacy PCs.
+![Activate Windows 11 License](screenshots/activate-windows-license.png)
+![Activate Office 2019 License](screenshots/activate-office-license.png)
+
+These comparisons show how RR-Turbo transforms marginal, officially "compatible" hardware from sluggish to responsive while restoring privacy and performance on refurbished and legacy PCs.
+
+## Known Issues
+
+(Full list remains in the README for visibility. Individual issues will be created in the Issues tab.)
 
 ## For Refurbishers & Builders
 

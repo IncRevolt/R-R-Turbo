@@ -84,23 +84,23 @@ All screenshots taken on the same hardware: **Lenovo IdeaPad 1 14ADA05 (82GW)** 
 
 **Before** — Stock Windows 11 + Office 365 (full bloat and telemetry):
 
-![Before - Stock Windows 11 + Office 365](Screenshots/task-manager-bloat.png)
+![Before - Stock Windows 11 + Office 365](screenshots/task-manager-bloat.png)
 
 **After** — RR-Turbo v6 + Office 2019 Pro Plus (debloated, with LibreWolf, Renewable Revolt Windows theme, and custom Revolt background):
 
-![After - RR-Turbo v6](Screenshots/task-manager-rr-turbo.png)
+![After - RR-Turbo v6](screenshots/task-manager-rr-turbo.png)
 
 **RR-Turbo v6 Desktop** (LibreWolf as default browser, Renewable Revolt theme and background):
 
-![RR-Turbo v6 Desktop](Screenshots/rr-turbo-v6-desktop.png)
+![RR-Turbo v6 Desktop](screenshots/rr-turbo-v6-desktop.png)
 
 **Activating Windows 11 License** (after first boot):
 
-![Activate Windows 11 License](Screenshots/activate-windows-license.png)
+![Activate Windows 11 License](screenshots/activate-windows-license.png)
 
 **Activating Office 2019 License**:
 
-![Activate Office 2019 License](Screenshots/activate-office-license.png)
+![Activate Office 2019 License](screenshots/activate-office-license.png)
 
 These comparisons show how RR-Turbo transforms marginal, officially "compatible" hardware from sluggish to responsive while restoring privacy and performance on refurbished and legacy PCs.
 

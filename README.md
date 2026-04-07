@@ -14,9 +14,11 @@ Debloated Windows 11 Image
 
 ---
 
-> *"Reports of this hardware's death were greatly exaggerated."*  
+> *"If extending the lifespan of electronics is cool...consider us Miles Davis."*  
 > Renewable Revolt, Inc. · Hammond, Indiana · 501(c)(3) · EIN: 99-2777606  
-> [renewablerevolt.org](https://renewablerevolt.org) · Veteran Owned & Operated
+> [renewablerevolt.org](https://renewablerevolt.org)
+>On X - @IncRevolt (https://x.com/IncRevolt)
+> Veteran Owned & Operated
 
 ---
 

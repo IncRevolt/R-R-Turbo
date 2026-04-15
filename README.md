@@ -245,6 +245,42 @@ After the first manual set, automatic updates work correctly.  This appears to b
 **On the subject of default location:**  
 The image ships with a default location set.  If you're in the Chicago area, you're already pointed at the right neighborhood.  If you're not, update it: **Settings → Privacy & Security → Location → Default Location → Set Default.**  We're in Chicagoland, so we use the address on Elwood Blues' driver's licence.
 
+### Group Policy Editor Warning
+
+When you open `gpedit.msc`, you will see a "resource file could not be found" error.  This is harmless and expected — we removed the policy templates for bloat that no longer exists.  Click OK and continue.
+
+---
+
+## Screenshots
+
+All screenshots taken on the same hardware: **Lenovo IdeaPad 1 14ADA05 (82GW)** — a 2021 budget 14" laptop with:
+
+- **AMD Athlon Silver 3050e** (2C/4T, 1.4–2.8 GHz) — on Microsoft's Windows 11 CPU compatibility list
+- **4 GB soldered DDR4-2400 RAM** (non-upgradable)
+- Integrated AMD Radeon Vega 3 graphics
+
+**Before** — Stock Windows 11 + Office 365 (full bloat and telemetry):  
+53 background processes | 15% CPU | 68% memory | 39% disk
+
+[![Before - Stock Windows 11 + Office 365](screenshots/task-manager-bloat.png)](screenshots/task-manager-bloat.png)
+
+**After** — RR Turbo v6 + Office 2019 Pro Plus (debloated, with LibreWolf, Renewable Revolt Windows theme, and custom Revolt background):  
+40 background processes | 2% CPU | 52% memory | 0% disk
+
+[![After - RR Turbo v6](screenshots/task-manager-rr-turbo.png)](screenshots/task-manager-rr-turbo.png)
+
+**RR Turbo v6 Desktop** (LibreWolf as default browser, Renewable Revolt theme and background):
+
+[![RR Turbo v6 Desktop](screenshots/rr-turbo-v6-desktop.png)](screenshots/rr-turbo-v6-desktop.png)
+
+**Activating Windows 11 License** (after first boot):
+
+[![Activate Windows 11 License](screenshots/activate-windows-license.png)](screenshots/activate-windows-license.png)
+
+**Activating Office 2019 License**:
+
+[![Activate Office 2019 License](screenshots/activate-office-license.png)](screenshots/activate-office-license.png)
+
 ---
 
 ## For Refurbishers and Builders

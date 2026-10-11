@@ -1,343 +1,132 @@
-# R-R-Turbo
-
-Debloated Windows 11 Image
-
-# Win 11 Pro [RR Turbo]
-
-### A Privacy-First Windows 11 Pro Image by Renewable Revolt, Incorporated
-
-**Version:** v6  
-**Base:** Windows 11 Pro (24H2)  
-**Built with:** UUP Dump · Tiny11 Builder (NTDEV) · NTLite  
-**Status:** Active production deployment — shipped on every Renewable Revolt build  
-**License:** MIT (build methodology and scripts)
-
+R-R-Turbo
+Debloated Windows 11 Pro with private, local AI — text, vision, and image generation that run entirely on your own graphics card.
+Win 11 Pro [RR Turbo]
+A Privacy-First Windows 11 Pro Image by Renewable Revolt, Incorporated
+Version: v7.5 (Full) · v7.6 (Lite)  
+Base: Windows 11 Pro 25H2, build 26200.9550 — security and feature updates through October 2026  
+Built with: UUP Dump · Tiny11 Builder (NTDEV) · NTLite · llama.cpp · stable-diffusion.cpp  
+Status: Stable — in production since June 2025  
+License: MIT (methodology and scripts)
 ---
-
-> *"If extending the lifespan of electronics is cool...consider us Miles Davis."*  
+> *"Reports of this hardware's death were greatly exaggerated."*  
 > Renewable Revolt, Inc. · Hammond, Indiana · 501(c)(3) · EIN: 99-2777606  
-> [renewablerevolt.org](https://renewablerevolt.org) · Veteran Owned & Operated  
-> On X — [@IncRevolt](https://x.com/IncRevolt)
-
+> [renewablerevolt.org](https://renewablerevolt.org) · Veteran Owned & Operated
 ---
-
-## What This Is
-
-RR Turbo is a custom Windows 11 Pro image built for refurbished and legacy hardware.  
-It ships on every machine we build — and we're publishing it so anyone else can use it.
-
-The goal is simple: a Windows installation that works *for the person sitting in front of it*, not for Microsoft's data collection pipeline, advertising network, or upsell funnel.
-
-This is not a debloat script that gets reversed on the next update.  Everything removed is removed **at the ISO level** — before the OS ever touches the drive.  Windows updates do not bring it back.  We proved this over multiple production deployment cycles across dozens of machines on multiple hardware platforms.  Five versions over four years, culminating in v6.
-
+What This Is
+RR Turbo is a custom Windows 11 Pro image for refurbished and legacy hardware.  It ships on every machine we build, and we publish it so anyone else can use it.
+The goal is simple: a Windows installation that works for the person in front of it, not for Microsoft's data-collection pipeline, advertising network, or upsell funnel.  Everything removed is removed at the image level — before the OS ever touches the drive — so Windows updates don't bring it back.
+v7 added private AI.  We removed Microsoft's Copilot and Recall because they watch what you do and send it to the cloud.  In their place: open-source AI models that run entirely on your own graphics card — no account, no subscription, no internet connection, and nothing leaves the machine.
 ---
-
-## Verified Performance
-
-Measured on: **Lenovo IdeaPad 1 14ADA05 · AMD Athlon Silver 3050e · 4GB DDR4-2400**
-
-| Metric | Result |
-|---|---|
-| Background processes vs. stock Win 11 Home | **~25% fewer** |
-| Available RAM headroom vs. stock Win 11 Home | **~50% more** |
-
-On a constrained 4GB system, that headroom is the difference between smooth operation and constant disk swapping.  On 16GB, it's the margin that keeps your game from hitting the page file the moment Discord opens.
-
+Three Downloads — Small, Medium, Large
+The local AI runs in your graphics card's video memory (VRAM), so the right download depends on your GPU.  Pick one:
+Download	Size class	For a GPU with	Local AI	Download
+v7.7 — Core	Small	any (incl. laptop / iGPU)	none — the clean, turn-key build	~12 GB (est.)
+v7.6 — Lite	Medium	4 GB VRAM	Bonsai 8B · DreamShaper 8	~16 GB
+v7.5 — Full	Large	12 GB VRAM	Bonsai 8B, Bonsai 2 27B (+vision), Qwen2.5-Coder 14B · DreamShaper 8, Realistic Vision, SDXL base, Juggernaut XL, Z-Image Turbo	~60 GB
+Not sure?  No discrete graphics card, or a laptop → Core.  A 4 GB card → Lite.  A 12 GB card → Full.  Running an 8 GB card?  Download Full and follow BUILD-8GB.md to trim it.
+v7.7 Core is the leanest: debloated Windows, Office, and LibreWolf with no AI stack and none of the desktop-only tooling (no Fan Control, OpenRGB, or bundled PDF app).  It's the right pick for older laptops and low-spec machines, and the only edition that needs no post-install driver step to be fully usable.
+Lite and Full add the private local AI — same Windows base, different model sets.  Upgrading a machine from Lite to Full is a GPU swap, then re-add the bigger models.
+The debloated Windows, Office, and LibreWolf are identical across all three.
 ---
-
-## License Requirements
-
-> ⚠️ **This image does not include a Windows license.**
-
-Users must provide their own valid **Windows 11 Pro** retail license.  
-Apply it after installation:
-
-```
-slmgr /ipk XXXXX-XXXXX-XXXXX-XXXXX-XXXXX
-```
-
-> ⚠️ **This image includes Office 2019 Pro Plus pre-installed.**
-
-Users must provide their own valid **Office 2019 Pro Plus** license.  
-The suite is ready to use — activation requires your own key.
-
-Purchase licenses only from authorized Microsoft resellers.
-
-We ship this image on machines sold through Renewable Revolt.  Our customers receive valid licenses as part of their purchase.  If you are using this image independently, licensing compliance is your responsibility.
-
+The Local AI
+In Lite and Full only.  Core (v7.7) ships without the AI stack — skip this section for that edition.
+	
+Text / vision engine	llama.cpp (Vulkan) on `127.0.0.1:8080`
+Image engine	stable-diffusion.cpp (Vulkan) on `127.0.0.1:7860`
+Interface	A dark, Renewable-Revolt chat page and image studio, served by the engines in your browser
+Privacy	Web search and browsing tools are off.  Both engines bind to `127.0.0.1` only — nothing is exposed to the network.  Chat history is stored in your browser, on your PC.
+Launch	Double-click the launcher for your card (`RR-AI-4GB` / `-8GB` / `-12GB`), pick a model from the menu, and the browser opens when the engine is ready.
+What it's good for: writing and editing, summarizing, explaining, brainstorming, reading images (vision), coding, and generating images from a text prompt.
+What it isn't: a news source.  Local models don't know recent events.  For current events, use a web search.
+No Python, no accounts, no cloud.  The whole stack is two small native Windows programs plus static HTML.  One engine runs at a time; close its window before switching modes.
 ---
-
-## How It's Built
-
-We focus on dependencies and stability — the same way you'd approach a slimmed-down Linux distribution.  Remove what you don't need.  Don't break what you do.  Test it until you're sure it holds.
-
-### Layer 1 — Clean ISO Source
-
-Windows 11 Pro ISOs sourced directly from Microsoft via **[UUP Dump](https://uupdump.net)**.  
-No third-party pre-built ISOs.  You can verify the source yourself — and you should.
-
-**ISO build command (oscdimg):**
-```
-oscdimg -m -o -u2 -udfver102 -bootdata:2#p0,e,b[UUP_folder]\boot\etfsboot.com#pEF,e,b[UUP_folder]\efi\microsoft\boot\efisys.bin [UUP_folder] RR-Turbo-v6.iso
-```
-Flash with **Rufus** in GPT / UEFI mode.  Do not use MBR.  Do not use Balena Etcher.  
-See [INSTALLATION.md](INSTALLATION.md) for the full flashing and activation workflow.
-
-### Layer 2 — Base Reduction (Tiny11 Builder)
-
-**[Tiny11 Builder](https://github.com/ntdevlabs/tiny11builder)** by NTDEV performs the initial image reduction via PowerShell script operating on the official Microsoft ISO.
-
-Full credit to NTDEV — this project stands on that foundation.  Go support him: [Ko-fi](https://ko-fi.com/ntdev) · [Patreon](https://patreon.com/ntdev)
-
-We use the **standard builder** — not Core.  The standard builder preserves Windows Update serviceability.  Tiny11 Core is described by its author as "not suitable for daily use."  We agree.
-
-### Layer 3 — Permanent ISO-Level Customization (NTLite)
-
-**[NTLite](https://www.nliteos.com)** makes removals permanent at the image level, configures services, applies Group Policy, and hardens the OS before installation ever occurs.
-
-This layer is why v6 holds.  v1–v3 applied tweaks post-install — settings, services, Configuration Manager, Group Policy Editor.  Windows 24H2 and subsequent updates reversed most of them.  NTLite at the ISO level does not have this problem.
-
-### Layer 4 — Post-Install Configuration
-
-Applied on first boot:
-
-- Windows Spotlight → off
-- Transparency effects → off
-- Widgets → off
-- Suggested content and tips → off
-
+Performance
+Measured at idle on two very different machines (v6 baseline; the AI runs only when you launch it, so idle is unchanged):
+25–38% fewer background processes
+24–47% less RAM in use
+CPU and disk activity at idle drop to near zero
+	Lenovo IdeaPad 1 14ADA05	HP Laptop 17-by0xxx
+CPU	AMD Athlon Silver 3050e (2C/4T)	Intel Core i3-8130U (2C/4T)
+RAM	4 GB DDR4-2400	32 GB DDR4-2400
+Background processes	53 → 40 (−25%)	73 → 45 (−38%)
+Memory in use	68% → 52% (−24%)	19% → 10% (−47%)
+Results may vary by hardware configuration (YMMV).
 ---
-
-## What's Removed
-
-### Removed by Tiny11 Builder
-
-- Microsoft Teams (consumer)
-- OneDrive
-- Microsoft Edge *(app removed — some Settings page remnants remain, cosmetic only)*
-- Cortana
-- Xbox apps and related services
-- Clipchamp
-- Mail and Calendar
-- Maps
-- Mixed Reality Portal
-- Skype
-- Solitaire Collection
-- Sticky Notes
-- Weather
-- Phone Link
-- News
-- Tips
-- Feedback Hub
-- Get Help
-- Power Automate
-- To Do
-- Camera
-- Dev Home
-- New Outlook client
-
-### Removed by NTLite — ISO Level, Permanent
-
-**Surveillance & AI**
-
-- Microsoft Copilot — screen monitoring AI, runs at startup
-- Windows Recall — screenshots your screen every few seconds and indexes content
-- All telemetry modules — cannot be fully disabled through standard Settings; we remove the modules entirely
-
-**Microsoft Ecosystem Lock-In**
-
-- Microsoft Edge — complete removal including update services and Bing integration
-- Microsoft Teams (additional complete pass)
-- Start menu web search (Bing)
-- Advertising ID services
-- Windows Search indexing of personal content
-
-**Background Data Collection**
-
-- Diagnostic data collection services
-- Connected User Experiences and Telemetry (DiagTrack)
-- Data Collection and Publishing service
-- Customer Experience Improvement Program (CEIP)
-- Error Reporting services (Watson)
-- Activity History and Timeline
-
-**Noise**
-
-- Xbox Game Bar background services
-- Microsoft Store push notification services
-- Suggested app install notifications
-- Location tracking services *(see Known Issues — this has a side effect)*
-
-### Services Disabled or Set to Manual
-
-| Service | Reason |
-|---|---|
-| SysMain (Superfetch) | Reduces disk thrashing on SSD builds |
-| Windows Error Reporting | Eliminates data transmission to Microsoft |
-| Connected User Experiences and Telemetry | Core telemetry service |
-| Diagnostic Policy Service | Feeds diagnostic data collection |
-| Remote Registry | Attack surface reduction |
-| Windows Insider Service | No insider builds on production hardware |
-| Geolocation Service | Privacy — see Known Issues |
-| Xbox services (×8) | Not needed on gaming-capable hardware with a real GPU |
-
-### Group Policy Applied at ISO Level
-
-- Telemetry locked to minimum (Security level)
-- Automatic driver updates from Windows Update disabled *(prevents driver conflicts on refurbished hardware with specific GPU configurations)*
-- Windows tips, tricks, and suggested content disabled
-- Consumer experience features disabled
-- Cortana disabled
-- Bing search in Start disabled
-- Windows Spotlight disabled
-- Lock screen advertisements disabled
-- Delivery Optimization restricted to LAN only — no uploading to Microsoft's CDN
-
+Install (overview)
+You need 7-Zip, wimlib (the small tool that writes the image — see below), a Windows 10/11 PC, and a USB-to-SATA or USB-to-NVMe adapter for the target SSD.  There is no bootable USB and no Windows installer — the image is written straight to the SSD.
+Download all parts of your chosen edition into one folder.
+Right-click the `.001` file → 7-Zip → Extract.  Password: Revolt
+Connect the target SSD and run `Install-RRTurbo-wimlib.ps1` in PowerShell as administrator.  Pick the SSD, type ERASE.  (ACL warnings during the apply are normal — see below.)
+Install the SSD in the target PC (BIOS: UEFI, AHCI) and turn it on.
+It boots straight to the desktop.  Add your license keys, install your GPU driver, and launch the AI.
+> **Why wimlib, and why no plain installer?**  These images are heavily debloated, and a few leftover packaged-app files carry security labels that stock Windows tools (DISM, Windows Setup) refuse to apply — they fail with `0x80070513`.  `wimlib-imagex` applies the image anyway, warning on those few files and continuing.  So the deploy is open and fully documented, but it's a deliberate, hands-on process — not a double-click installer.
+Full step-by-step, BIOS settings, first-boot checklist, and AI launch: INSTALLATION.md.
+Minimum specs: 2-core/4-thread CPU, UEFI firmware, 256 GB SSD.  For local AI: 16 GB system RAM and a GPU with 4 GB+ of VRAM (tested on AMD Radeon).
 ---
-
-## What's Included
-
-| Software | Notes |
-|---|---|
-| **Office 2019 Pro Plus** | Pre-installed.  License required — see above.  Permanent, no subscription. |
-| **DuckDuckGo Browser** | Default browser.  Privacy-first, no Google tracking. |
-| **LibreWolf** | Firefox fork with telemetry removed, uBlock Origin pre-installed, privacy hardened.  Handles the small number of sites that need a full-featured browser engine. |
-| **Fan Control v250** | Open source.  Pre-configured for Thermalright cooling hardware.  [GitHub](https://github.com/Rem0o/FanControl.Releases) |
-| **OpenRGB** | Open source, vendor-neutral ARGB control.  Pre-configured for Nollie RGB controllers.  [openrgb.org](https://openrgb.org) |
-| **uPDF** | Lightweight PDF viewer, configured as default.  No background services.  No Adobe.  For documents requiring Adobe features, right-click → Open With → Adobe (install separately as needed). |
-| **DiskGenius (Free)** | Disk management and partition tool.  Developed by Eassos Ltd.  Legitimate, widely used.  Substitute your preferred tool. |
-
+What's Removed (Permanent at Image Level)
+Surveillance & cloud AI: Microsoft Copilot, Windows Recall, all telemetry modules.  
+Lock-in: Microsoft Edge (incl. update services), Consumer Teams, OneDrive, Cortana, Xbox/Game Bar, Start-menu web search, advertising ID.  
+Background data collection: DiagTrack, Data Collection and Publishing, CEIP, Watson error reporting, Activity History.  
+Apps: Clipchamp, Mail/Calendar, Maps, Weather, News, Tips, Feedback Hub, and most preinstalled consumer apps.
+Telemetry is locked to Security level, Delivery Optimization is limited to the local network, and location/advertising/indexing services are removed.
 ---
-
-## A Note on Browser History
-
-**v1–v3: Firefox**  
-Firefox is a fine browser — not a serious privacy risk.  We found DuckDuckGo to be lighter and less resource-intensive as a primary browser.  Mozilla is a nonprofit, Firefox is open source, and it's one of the most audited browsers available.  The real concerns (telemetry on by default, Pocket integration, sponsored tiles) are real but configurable.
-
-**v4–v5 initial: Opera Air**  
-Opera has been owned by a Chinese investment consortium (Golden Brick Capital Private Equity) since 2016.  For a privacy-first image, that ownership is a structural problem you can't configure away.  We should have caught this sooner.  We didn't.  It's gone.
-
-**v5–v6 current: DuckDuckGo + LibreWolf**  
-DuckDuckGo handles 95% of use cases.  LibreWolf handles the rest.  Both are open source, both have clean ownership, and together they cover the full surface better than either browser alone.
-
+What's Included
+Software	Notes
+Office 2019 Pro Plus	Pre-installed, unactivated.  Bring your own key.  Permanent, no subscription.
+LibreWolf	Default browser.  Firefox fork, telemetry removed, uBlock Origin pre-installed.
+Renewable Revolt AI	llama.cpp + stable-diffusion.cpp + models, configured and ready.  See above.
+Fan Control v226	Open source, pre-configured for Thermalright coolers.
+OpenRGB	Open source, vendor-neutral ARGB control.
+uPDF	Lightweight PDF reader, default.  No background services.
+Graphics driver tools in the Downloads folder: NVCleanstall (NVIDIA), Radeon Software Slimmer (AMD).  The image ships with no vendor GPU driver — install yours after first boot; the AI needs it.
+Optional installers in Downloads (not pre-installed): DuckDuckGo Browser, DiskGenius Free.
 ---
-
-## A Note on Signal RGB
-
-Early builds included Signal RGB for ARGB control.  A community member correctly called it out.  Signal RGB is closed-source, requires a cloud account, and runs persistent background services — the opposite of everything this image is trying to be.  OpenRGB replaced it.  Open source, vendor-neutral, no account required, pre-configured before it ships.
-
-OpenRGB is easy to use, but has a "Windows 95" feel and takes a few minutes to configure properly.  Best setup guide we've found is on the Nollie RGB website:  
-<https://nolliergb.com/how-to-setup-openrgb-effects-engine-plugin/>
-
-Being corrected publicly is how open source is supposed to work.  Credit to the person who spotted it.
-
+Licensing
+No Windows license is included — bring your own Windows 11 Pro key.
+Office 2019 Pro Plus is pre-installed but unactivated — bring your own key.
+AI models are covered by their own licenses, included under `C:\Users\Public\RenewableRevolt\...\licenses\`.  Several use OpenRAIL-style terms; review them before redistributing.
+Renewable Revolt ships licensed machines.  Independent users are responsible for their own compliance.
+This repository (methodology, scripts, docs) is MIT.  The Windows image is a modified Microsoft product; no Microsoft trademarks or copyrighted material beyond fair use for modification is claimed.
 ---
-
-## Known Issues
-
-### Time Zone — Set Manually on First Boot
-
-After installation, set your time zone once:  
-**Settings → Time & Language → Date & Time → Time Zone**
-
-After the first manual set, automatic updates work correctly.  This appears to be a side effect of location services being disabled at the ISO level.  We have not found a workaround that doesn't require re-enabling location tracking.  One manual set on first boot is the current solution.
-
-**On the subject of default location:**  
-The image ships with a default location set.  If you're in the Chicago area, you're already pointed at the right neighborhood.  If you're not, update it: **Settings → Privacy & Security → Location → Default Location → Set Default.**  We're in Chicagoland, so we use the address on Elwood Blues' driver's licence.
-
-### Group Policy Editor Warning
-
-When you open `gpedit.msc`, you will see a "resource file could not be found" error.  This is harmless and expected — we removed the policy templates for bloat that no longer exists.  Click OK and continue.
-
+Known Issues
+Same computer name on every install.  Rename the PC after first boot (Settings → System → About → Rename this PC).  The shared internal security ID doesn't matter for home or small-office PCs that aren't joined to a company domain.
+Won't start / `INACCESSIBLE_BOOT_DEVICE` — turn off Intel VMD/RST and set storage to AHCI in the BIOS (common on Intel 11th-gen and newer laptops).
+Group Policy Editor warning — opening `gpedit.msc` shows a "resource file could not be found" message.  Harmless; we removed the policy templates for features that no longer exist.  Click OK.
+Time zone — set it once on first boot (location services are off by design).
 ---
-
-## Screenshots
-
-All screenshots taken on the same hardware: **Lenovo IdeaPad 1 14ADA05 (82GW)** — a 2021 budget 14" laptop with:
-
-- **AMD Athlon Silver 3050e** (2C/4T, 1.4–2.8 GHz) — on Microsoft's Windows 11 CPU compatibility list
-- **4 GB soldered DDR4-2400 RAM** (non-upgradable)
-- Integrated AMD Radeon Vega 3 graphics
-
-**Before** — Stock Windows 11 + Office 365 (full bloat and telemetry):  
-53 background processes | 15% CPU | 68% memory | 39% disk
-
-[![Before - Stock Windows 11 + Office 365](screenshots/task-manager-bloat.png)](screenshots/task-manager-bloat.png)
-
-**After** — RR Turbo v6 + Office 2019 Pro Plus (debloated, with LibreWolf, Renewable Revolt Windows theme, and custom Revolt background):  
-40 background processes | 2% CPU | 52% memory | 0% disk
-
-[![After - RR Turbo v6](screenshots/task-manager-rr-turbo.png)](screenshots/task-manager-rr-turbo.png)
-
-**RR Turbo v6 Desktop** (LibreWolf as default browser, Renewable Revolt theme and background):
-
-[![RR Turbo v6 Desktop](screenshots/rr-turbo-v6-desktop.png)](screenshots/rr-turbo-v6-desktop.png)
-
-**Activating Windows 11 License** (after first boot):
-
-[![Activate Windows 11 License](screenshots/activate-windows-license.png)](screenshots/activate-windows-license.png)
-
-**Activating Office 2019 License**:
-
-[![Activate Office 2019 License](screenshots/activate-office-license.png)](screenshots/activate-office-license.png)
-
+Updating and Adding Models
+See MODEL-UPDATES.md — how the backend works in 30 seconds, where each model file goes, Hugging Face search terms, and the two rules for drop-in replacement.
 ---
-
-## For Refurbishers and Builders
-
-This methodology is published so you can replicate it — not just use the output.
-
-If you're rebuilding hardware for distribution and cloning this image using DiskGenius or similar:
-
-> **Run DDU (Display Driver Uninstaller) in Safe Mode before cloning.**  
-> GPU drivers baked into the image will cause problems on different GPU hardware.  
-> A clean image has no GPU drivers.  Each machine installs its own on first boot.
-
-Full build documentation:
-
-- [INSTALLATION.md](INSTALLATION.md) — Flashing workflow, Rufus settings, activation steps
-- [BUILD_WALKTHROUGH.md](BUILD_WALKTHROUGH.md) — Full ISO build methodology, NTLite configuration, Layer 3 settings
-- [RELEASE_NOTES.md](RELEASE_NOTES.md) — Version history, what changed in each build
-
-Platform-specific notes (X79, X99, Coffee Lake) are in progress.
-
+For Refurbishers and Builders
+The methodology is published so you can replicate it.  Build, cleanup, capture, and test are in the internal build runbook; the field guides are BUILD-8GB.md (make an 8 GB edition from Full), BUILD-77.md (make the no-AI Core edition), and MODEL-UPDATES.md.
+> **Run DDU in Safe Mode before cloning.**  A clean image has no vendor GPU driver; each machine installs its own on first boot.
 ---
-
-## Roadmap
-
-- Custom Android ROMs for tablets and phones *(hardware selection in progress)*
-- Platform-specific optimization notes — X79 ECC, X99 quad-channel DDR4, Coffee Lake LGA 1151v2
-- Automated benchmark tooling for measuring process count and available RAM headroom on new hardware
-- Fan Control profiles for additional cooler hardware
-
+Version History
+Windows base by release: v1–v5 spanned 21H2 → 24H2, v6 was 24H2, v7 is 25H2.
+v1–v3 (21H2 / 22H2 era): Post-install tweaks (reversed by Windows updates — lessons learned)
+v4: First NTLite image-level pass
+v5 (through 24H2): Stable — shipped on all production builds since June 2025
+v6 (24H2): LibreWolf, Renewable Revolt theme, performance verified, debloat-only (archived docs)
+v7.5 (Full) (25H2, build 26200.9550): Current — private local AI (llama.cpp + stable-diffusion.cpp; text, vision, and image generation), all updates through October 2026, direct-to-SSD install
+v7.6 (Lite) (25H2, build 26200.9550): Current — the 4 GB edition: Bonsai 8B + DreamShaper 8, same everything else
+v7.7 (Core) (25H2, build 26200.9550): Current — the no-AI, legacy/laptop edition: debloated Windows + Office + LibreWolf, stripped of the AI stack and desktop-only tooling; the turn-key build (build guide)
 ---
-
-## Credit Where It's Due
-
-This image would not exist without:
-
-| Project | Credit |
-|---|---|
-| **[Tiny11 Builder](https://github.com/ntdevlabs/tiny11builder)** — NTDEV | The foundation.  Support him: [Ko-fi](https://ko-fi.com/ntdev) / [Patreon](https://patreon.com/ntdev) |
-| **[UUP Dump](https://uupdump.net)** | Clean, verifiable Microsoft ISOs |
-| **[NTLite](https://www.nliteos.com)** | The tool that made permanence possible |
-| **[OpenRGB](https://openrgb.org)** | Open source, vendor-neutral RGB.  The right way. |
-| **[Fan Control](https://github.com/Rem0o/FanControl.Releases)** — Rem0o | Open source fan curve software that actually works |
-| **[LibreWolf](https://librewolf.net)** | Firefox, fixed |
-| **[Nollie RGB](https://nolliergb.com)** | RISC-V ARGB controllers.  The hardware OpenRGB talks to. |
-
+Credits
+Project	For
+Tiny11 Builder — NTDEV	The debloat foundation.  Support him: Ko-fi / Patreon
+UUP Dump	Clean, verifiable Microsoft ISOs
+NTLite	Permanent image-level customization
+llama.cpp — ggml-org	The text/vision engine
+stable-diffusion.cpp — leejet	The image engine
+Hugging Face	Where the open models live
+PrismML · Qwen (Alibaba) · Lykon · SG161222 · Stability AI · RunDiffusion	The AI models
+OpenRGB · Fan Control (Rem0o) · LibreWolf · Nollie RGB	Bundled open-source tools
+NVCleanstall (TechPowerUp) · Radeon Software Slimmer	Clean GPU driver installs
 ---
-
-## About Renewable Revolt
-
+About Renewable Revolt
 We recover enterprise hardware from e-waste streams and rebuild it into optimized, privacy-first computers for veterans, students, and underserved families.
-
-Below $800, there are zero new gaming desktops with capable GPUs at any major US retailer.  
-We fill that gap — starting at $399.
-
-**[renewablerevolt.org](https://renewablerevolt.org)** · **[eBay Store](https://ebay.us/m/KgGZ0K)** — 100% positive feedback  
+Below $800, there are zero new gaming desktops with capable GPUs at any major US retailer.  We fill that gap — starting at $349.
+renewablerevolt.org · eBay Store — 100% positive feedback  
 501(c)(3) · EIN: 99-2777606 · Hammond, Indiana · Veteran Owned & Operated
-
 ---
-
-*Recover.  Revive.  Redeploy.*
+Recover. Revive. Redeploy.

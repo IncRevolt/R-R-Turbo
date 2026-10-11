@@ -2,7 +2,7 @@ R-R-Turbo
 Debloated Windows 11 Pro with private, local AI — text, vision, and image generation that run entirely on your own graphics card.
 Win 11 Pro [RR Turbo]
 A Privacy-First Windows 11 Pro Image by Renewable Revolt, Incorporated
-Version: v7.5 (Full) · v7.6 (Lite)  
+Version: v7.5 (Full) · v7.6 (Lite) · v7.7 (Core)  
 Base: Windows 11 Pro 25H2, build 26200.9550 — security and feature updates through October 2026  
 Built with: UUP Dump · Tiny11 Builder (NTDEV) · NTLite · llama.cpp · stable-diffusion.cpp  
 Status: Stable — in production since June 2025  

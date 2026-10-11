@@ -1,135 +1,105 @@
-# RR-Turbo v6 — Installation Guide
-
-## What You Need
-
-* **7-Zip** (free) — [7-zip.org](https://www.7-zip.org/)
-* **Rufus** (recommended) — [rufus.ie](https://rufus.ie/) — OR **Ventoy** — [ventoy.net](https://www.ventoy.net/)
-* A **USB drive** (16 GB minimum)
-* A valid **Windows 11 Pro retail license key**
-* A valid **Office 2019 Pro Plus license key**
-
-## Step 1 — Download
-
-Go to the [Releases page](https://github.com/IncRevolt/R-R-Turbo/releases) and download **all** parts of the split archive:
-
+Installing RR Turbo (v7.x)
+This guide covers all three editions — v7.7 Core, v7.6 Lite, and v7.5 Full.  The steps are identical; only the download size and (for Lite/Full) the AI launch at the end differ.
+RR Turbo is written straight to the SSD.  There is no bootable USB and no Windows installer — you deploy the image from any working Windows PC, then move the SSD into the target machine.
+> **The deploy uses `wimlib-imagex`, not Windows' own DISM.**  These images are heavily debloated, and a handful of leftover packaged-app files carry security labels that stock Windows tools (DISM / Windows Setup) refuse to apply — they abort with error `0x80070513`.  `wimlib-imagex` applies the image anyway: it warns on those few files and keeps going.  That's why you'll download one small extra tool below, and why **you can't install these images with a normal Windows installer** — only with the method in this guide.
+---
+Before You Start
+On the PC you'll deploy from (any Windows 10/11 machine):
+7-Zip installed
+wimlib — download the Windows build from wimlib.net/downloads (the `windows-x86_64` `.zip`), and extract it.  Keep `wimlib-imagex.exe` next to its `libwim` DLL — don't separate them.  This is the tool that actually writes the image.
+A USB-to-SATA or USB-to-NVMe adapter (or an internal port) for the target SSD
+Free space equal to the download plus the extracted `.wim` (budget ~130 GB free for Full, ~45 GB for Lite, ~35 GB for Core)
+The target SSD:
+256 GB minimum.  Everything on it will be erased.
+The target PC:
+2-core / 4-thread CPU, UEFI firmware
+For local AI: 16 GB system RAM and a GPU with 4 GB+ VRAM (v7.6) or 12 GB (v7.5)
+> **Back up first.**  The deploy step erases the entire target SSD.  Double-check the disk number before you type `ERASE`.
+---
+Step 1 — Download
+Download every part of your edition into one folder:
+v7.7 Core — ~7 parts, estimated (finalized on release)
+v7.6 Lite — 9 parts (`RR-Turbo-v7.6.7z.001` … `.009`)
+v7.5 Full — 32 parts (`RR-Turbo-v7.5.7z.001` … `.032`)
+7-Zip needs the whole set before it can extract.  A missing part fails the extraction.
+Verify the download (optional but recommended):  compare the `SHA256SUMS.txt` published on the release page against your files.  In PowerShell:
+```powershell
+Get-FileHash .\RR-Turbo-v7.5.7z.001 -Algorithm SHA256
 ```
-RR-Turbo-v6.7z.001
-RR-Turbo-v6.7z.002
-RR-Turbo-v6.7z.003
-...
+---
+Step 2 — Extract
+Right-click the `.001` file (only the `.001` — not the others).
+7-Zip → Extract Here.
+Password: `Revolt`
+7-Zip stitches the parts back together and produces a single `.wim` file (`RR-Turbo-v7.5.wim` or `RR-Turbo-v7.6.wim`).  That one file is the image.
+You can delete the `.7z.0xx` parts once extraction finishes and the `.wim` is in hand.
+---
+Step 3 — Connect the Target SSD
+Connect the SSD to your deploy PC via the adapter.  Windows may prompt to format a new disk — cancel / ignore it.  Don't initialize or format it yourself; the deploy script handles partitioning.
+Confirm Windows sees it:
+```powershell
+Get-Disk | Select-Object Number, FriendlyName, @{n='SizeGB';e={[math]::Round($_.Size/1GB)}}, PartitionStyle
 ```
-
-Place all parts in the **same folder**.  Do not rename any files.
-
-## Step 2 — Extract
-
-1. Install [7-Zip](https://www.7-zip.org/) if you haven't already.
-2. Right-click the **first file** (`RR-Turbo-v6.7z.001`).
-3. Select **7-Zip → Extract Here**.
-4. When prompted for a password, enter: **Revolt**
-5. Wait for extraction to complete.  You will get a single file: `RR-Turbo-v6.iso`.
-
-**Troubleshooting:** If extraction fails, re-download any parts that show a different file size than the others on the Releases page.  All parts except the last should be the same size.
-
-## Step 3 — Create Bootable USB
-
-### Option A — Rufus (Recommended)
-
-1. Open Rufus.
-2. Select your USB drive under **Device**.
-3. Click **SELECT** and choose `RR-Turbo-v6.iso`.
-4. Rufus will auto-detect the settings.  Confirm they match the screenshot below:
-
-![Rufus Settings](screenshots/rufus-settings.png)
-
-**Recommended Rufus settings:**
-
-* **Image option:** Standard Windows installation
-* **Partition scheme:** GPT
-* **Target system:** UEFI (non CSM)
-* **File system:** NTFS
-
-5. Click **START**.
-6. Rufus will show a **"Windows User Experience"** dialog.  Check all of the following:
-
-* ✅ Remove requirement for 4GB+ RAM, Secure Boot and TPM 2.0
-* ✅ Remove requirement for an online Microsoft account
-* ✅ Create a local account with username (your choice)
-* ✅ Set regional options to the same values as this user's
-* ✅ Disable data collection (Skip privacy questions)
-* ✅ Disable BitLocker automatic device encryption
-
-7. Click **OK**, then wait for the write to complete.
-
-**Why these matter:** The TPM/Secure Boot bypass is essential if you're running X79, X99, or other legacy hardware.  The local account option lets you skip the Microsoft account requirement entirely.  Disabling BitLocker prevents automatic encryption on refurbished drives where you want full control.
-
-### Option B — Ventoy
-
-1. Install Ventoy on your USB drive (this only needs to be done once).
-2. Copy `RR-Turbo-v6.iso` to the Ventoy partition on the USB drive.
-3. Boot from the USB drive and select the ISO from the Ventoy menu.
-
-## Step 4 — Install (No Internet Required)
-
-**Do not connect to Wi-Fi or Ethernet during setup.**  RR-Turbo is designed for fully offline installation.
-
-1. Boot from the USB drive (adjust BIOS boot order if needed — typically F2, F12, or DEL during POST).
-2. At the **"Select language settings"** screen, confirm English (United States) and click **Next**.
-3. Click **Install now**.
-4. When asked for a product key, click **"I don't have a product key"** — you'll activate after setup.
-5. Select **Windows 11 Pro** from the edition list.
-6. Accept the license terms.
-7. Choose **"Custom: Install Windows only (advanced)"**.
-8. Select your target drive and click **Next**.  Windows will install and reboot.
-
-### Offline Account Setup (OOBE)
-
-After the install reboots, Windows will try to get you online.  Stay offline:
-
-1. **Region:** Select your country, click **Yes**.
-2. **Keyboard layout:** Confirm or add layouts, click **Yes** / **Skip**.
-3. **Network:** When Windows asks you to connect to a network:
-   * If you used the Rufus bypass (recommended), it will skip this step automatically and go straight to local account creation.
-   * If you did NOT use the Rufus bypass: press **Shift+F10** to open a command prompt, type `oobe\bypassnro`, press Enter.  The PC will reboot and you'll get an **"I don't have internet"** option at the network screen.  Click it, then click **"Continue with limited setup"**.
-4. **Account name:** Enter your preferred username.
-5. **Password:** Set your password.
-6. **Security questions:** Answer three security questions (required for local accounts).
-7. **Privacy settings:** Toggle everything off, click **Accept**.
-
-Windows will finalize setup and boot to the desktop.
-
-## Step 5 — First Boot Checklist
-
-After reaching the desktop, complete these steps in order:
-
-1. **Restart once** — some Group Policy changes require a reboot to fully apply.
-2. **Set your time zone** — Settings → Time & Language → Date & Time.  De-select "Set time automatically," set the correct time, then re-select "Set time automatically."
-3. **Change your location** — the default location is an Easter egg.  Set it to your actual location if desired.
-4. **Activate Windows** — Settings → System → Activation → Change Product Key.  Enter your valid Windows 11 Pro retail key.
-5. **Activate Office 2019** — open any Office app (e.g., Excel) → Account → Switch License → enter your valid Pro Plus key.
-6. **Install GPU drivers** — no vendor GPU drivers are included (ships with Microsoft Basic Display Adapter).  Use NVCleanstall (NVIDIA) or Radeon Software Slimmer (AMD) from the Downloads folder, or download fresh drivers directly from the manufacturer.  Running DDU in Safe Mode first is recommended.
-7. **Configure Fan Control** — pre-configured for Thermalright air coolers.  Click the wrench icon → Assisted Setup to reconfigure for your hardware.  **Save your profile.**
-8. **Configure OpenRGB** — pre-configured for Nollie ARGB controllers.  Reconfigure as needed.  Guide at [nolliergb.com](https://nolliergb.com/).  **Save your profile.**
-9. **Run Windows Update once** — connect to the internet and run Windows Update to pick up any critical security patches.
-
-## Known Issues
-
-* **Group Policy Editor warning** — you will see a "resource file could not be found" error when opening `gpedit.msc`.  This is harmless and expected — we removed the policy templates for bloat that no longer exists.  Click OK and continue.
-* **Adobe Acrobat** — if installed separately, can freeze 4 GB RAM machines when running alongside a browser and Office.  We ship uPDF as the default PDF reader.  Use Ctrl+Alt+Del to close Adobe if it locks up.
-
-## Hardware Minimums
-
-* 2C/4T CPU or better
-* 4 GB RAM (SSD required)
-* SSD (SATA III works; NVMe recommended)
-
-For 4 GB RAM systems: set a paging file of 3× RAM (12,288 MB).  For 8 GB+, use 1.5× RAM.
-
-System Properties → Advanced → Performance Settings → Advanced → Virtual Memory.
-
-Machines below these specs are better served by a lightweight Linux distribution such as Peppermint OS or Bodhi Linux.
-
-## Licensing
-
-This image does **not** include a Windows or Office license.  Users must provide their own valid retail keys.  Renewable Revolt ships valid licenses on all machines sold through our organization — independent users are responsible for their own licences.
-
+Note the disk number of the target SSD.  You'll need it in the next step.
+---
+Step 4 — Deploy
+Open PowerShell as Administrator (right-click → Run as administrator).
+Run the deploy script, pointing it at your `.wim` (and, if it isn't under your Downloads folder, at `wimlib-imagex.exe`):
+```powershell
+.\Install-RRTurbo-wimlib.ps1 -ImagePath .\RR-Turbo-v7.5.wim
+```
+The script auto-finds `wimlib-imagex.exe` under your Downloads folder.  If you put it elsewhere, add `-WimlibPath "C:\path\to\wimlib-imagex.exe"`.
+The script lists every disk and refuses to touch the disk your image is on.  Pick the target SSD's number.
+It shows the disk's size one more time, then asks you to type `ERASE` to confirm.
+The script then: wipes the disk, creates a clean GPT layout (EFI + MSR + Windows), applies the image with `wimlib-imagex`, clears stale drive mappings, and writes the UEFI boot files with `bcdboot`.  Expect 15–45 minutes depending on the drives.
+> **You will see ACL warnings scroll past** — something like *"Could not set security descriptor on 47 files or directories."*  **This is normal and expected.**  Those few packaged-app files get default permissions; everything else applies correctly.  Do **not** re-run as administrator (you already are — it's the security label, not a permissions problem).  The apply still completes, and the image boots fine.
+When it finishes ("Deployed … successfully"), safely eject the SSD.
+---
+Step 5 — Install the SSD and First Boot
+Install the SSD in the target PC.
+Enter the BIOS/UEFI and set:
+Boot mode: UEFI (not Legacy/CSM)
+Storage: AHCI — turn off Intel VMD / RST / "RAID" (common on Intel 11th-gen and newer laptops; leaving it on causes `INACCESSIBLE_BOOT_DEVICE`)
+Secure Boot: on is fine
+Save and boot.
+It boots straight to the desktop — no OOBE, no Microsoft account, no setup wizard.  The default account has a blank password; the machine logs in automatically.
+> **Set a password if you want one:** Settings → Accounts → Sign-in options → Password.  Or sign in with a Microsoft account / set up Windows Hello.  The blank default is deliberate — the machine is usable the instant it boots, and the owner decides their own security.
+---
+Step 6 — First-Boot Checklist
+[ ] Rename the PC — Settings → System → About → Rename this PC.  (Every install ships with the same name.)
+[ ] Set the time zone — location services are off, so Windows can't guess it.
+[ ] Install your GPU driver — the image ships with no vendor driver.  Use the clean installers in the Downloads folder: NVCleanstall (NVIDIA) or Radeon Software Slimmer (AMD).  The local AI will not run until the GPU driver is installed.
+[ ] Add license keys — Windows 11 Pro (bring your own) and, if you use it, Office 2019 (bring your own).
+[ ] Connect to Wi-Fi — only needed for Windows activation and updates; the AI runs fully offline.
+---
+Step 7 — Launch the AI
+Lite and Full only.  v7.7 Core has no local AI — there's nothing to launch, and you're done after Step 6.
+Everything is pre-installed at `C:\Users\Public\RenewableRevolt\`.  On the Public desktop, double-click the launcher for your card:
+Edition	Launcher
+v7.6 Lite (4 GB)	`RR-AI-4GB.bat`
+8 GB (DIY)	`RR-AI-8GB.bat`
+v7.5 Full (12 GB)	`RR-AI-12GB.bat`
+A menu lists the models for your card.  Pick one by number.
+The engine loads the model into VRAM (first load takes a few seconds).
+Your browser (LibreWolf) opens the interface automatically when the engine is ready:
+Text / vision → `http://127.0.0.1:8080`
+Image generation → `http://127.0.0.1:7860`
+Only one engine runs at a time.  To switch between chat and image generation, close the engine's console window first, then launch the other mode.
+Both engines bind to `127.0.0.1` only — nothing is exposed to your network, and nothing leaves the machine.
+---
+Troubleshooting
+Symptom	Fix
+"Could not set security descriptor on N files" during apply	Expected and harmless — those packaged-app files get default permissions.  The apply completes; do not re-run as admin.
+Error `0x80070513` / the apply aborts	You're using DISM or Windows Setup, not `wimlib-imagex`.  Stock Windows tools can't apply these images — use `Install-RRTurbo-wimlib.ps1` (Step 4).
+`wimlib-imagex.exe not found`	Download wimlib from wimlib.net/downloads, extract it under Downloads, or pass `-WimlibPath`.
+`INACCESSIBLE_BOOT_DEVICE` on first boot	BIOS: turn off Intel VMD/RST, set storage to AHCI.
+BIOS doesn't see the SSD at all	Re-seat it; confirm the port is enabled; try a different M.2/SATA slot.
+AI menu loads but the model won't start	GPU driver not installed, or the model is too big for your card's VRAM — pick a smaller model, or install the driver.
+Browser doesn't open on launch	The engine still works — manually browse to `http://127.0.0.1:8080` (text) or `:7860` (image).
+`gpedit.msc` shows "resource file not found"	Harmless — click OK.  Policy templates for removed features were stripped.
+Windows won't activate	You need your own Windows 11 Pro key (Settings → System → Activation).  No key ships with the image.
+---
+Deploying to Many Machines
+The `.wim` is reusable.  Keep it on your deploy PC and run Step 4 for each new SSD — no need to re-extract.  After cloning onto production machines, run DDU in Safe Mode before you image on the master if you've ever installed a vendor driver on it; a clean image carries no GPU driver, and each target installs its own on first boot.
+---
+Questions or problems:  open an issue on the repo, or renewablerevolt.org.

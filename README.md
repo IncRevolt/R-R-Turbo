@@ -125,7 +125,7 @@ NVCleanstall (TechPowerUp) · Radeon Software Slimmer	Clean GPU driver installs
 ---
 About Renewable Revolt
 We recover enterprise hardware from e-waste streams and rebuild it into optimized, privacy-first computers for veterans, students, and underserved families.
-Below $800, there are zero new gaming desktops with capable GPUs at any major US retailer.  We fill that gap — starting at $349.
+Below $900, there are zero new gaming desktops with capable GPUs at any major US retailer.  We fill that gap.
 renewablerevolt.org · eBay Store — 100% positive feedback  
 501(c)(3) · EIN: 99-2777606 · Hammond, Indiana · Veteran Owned & Operated
 ---
